@@ -1,0 +1,33 @@
+{
+  "name": "vuact",
+  "version": "1.0.0",
+  "description": "For devs who love Vue/Vuex but have to write React/Redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breachofmind/vuact.git"
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "react",
+    "redux"
+  ],
+  "author": "Mike Adamczyk <mike@bom.us>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/breachofmind/vuact/issues"
+  },
+  "homepage": "https://github.com/breachofmind/vuact#readme",
+  "peerDependencies": {
+    "react": "^15.6.1",
+    "react-redux": "^5.0.6"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4"
+  }
+}
