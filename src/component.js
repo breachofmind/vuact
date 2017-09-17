@@ -14,21 +14,20 @@ export function createComponent(store) {
    * Create a new react component using vue syntax.
    * @returns {Component}
    */
-  return function component(cmp) {
+  return function component(name, cmp) {
 
     if (typeof cmp === 'function') {
-      return component({ name: cmp.name, render: cmp });
+      return component(name, { render: cmp });
     }
     const {
-      name,
       render,
       mapProps: _mapProps = [],
       mapActions: _mapActions = [],
       computed = {},
       methods = {},
       components = {},
-      state = _.noop(),
-      mounted = _.noop(),
+      state = () => ({}),
+      mounted = _.noop,
     } = cmp;
 
     if (typeof render !== 'function') {
@@ -95,7 +94,7 @@ export function createComponent(store) {
        * @param handler {Function|string|undefined} optional
        * @returns {{value: *, onInput: (function(*))}}
        */
-      model(stateProperty, handler) {
+      $model(stateProperty, handler) {
         if (typeof handler === 'string') handler = this[handler];
         return {
           value: this[stateProperty],
@@ -106,6 +105,25 @@ export function createComponent(store) {
               : value;
           }
         }
+      }
+
+      $push(stateProperty, data) {
+        const value = this.state[stateProperty];
+        value.push(data);
+        this.setState({ [stateProperty]: value });
+      }
+
+      $splice(stateProperty, index, count) {
+        const value = this.state[stateProperty];
+        value.splice(index, count);
+        this.setState({ [stateProperty]: value });
+      }
+
+      static renderEach(arr, addtionalProps) {
+        return arr.map((value, index) => {
+          const props = Object.assign({ index }, value, addtionalProps);
+          return <Component key={index} {...props}/>
+        });
       }
       /**
        * Render the HTML.

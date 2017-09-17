@@ -82,13 +82,9 @@ export function createStore(opts) {
 
   const store = createReduxStore(reducer);
 
-  return {
-    store,
-    mapState,
-    mapGetters,
-    mapActions,
-    get state() {
-      return Object.assign({}, state);
-    }
-  }
+  store.mapState  = mapState;
+  store.mapGetters = mapGetters;
+  store.mapActions = mapActions;
+
+  return store;
 }
